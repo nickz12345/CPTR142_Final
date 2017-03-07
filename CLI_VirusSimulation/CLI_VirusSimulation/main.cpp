@@ -7,129 +7,111 @@
 
 
 #include <iostream>
-#include <string>
 #include <vector>
-#include <cmath>
-#include <cstdio>
 #include <ctime>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
 #include "Person.h"
 #include "Ambulance.h"
 using namespace std;
+using namespace this_thread;
+using namespace chrono;
 
-// Increase array size
-int* doubleCapacity(const int* list, int size)
-{
-	int arraySize = 2 * size;
-	int* temp;
-	temp = new int[arraySize];
-	for (int i = 0; i < size; i++)
-	{
-		temp[i] = list[i];
-	}
-
-	return temp;
-}
 
 int main()
 {
 	// Check for user OS to see if we need to "pause" at end
-	bool windows;
-	char userOS;
-	cout << "Are you running this program on Windows? (y/n) ";
-	cin >> userOS;
-	if (userOS == 'y' || userOS == 'Y')
-	{
-		windows = true;
-	}
-	if (userOS == 'n' || userOS == 'N')
-	{
-		windows = false;
-	}
+//	bool windows;
+//	char userOS;
+//	cout << "Are you running this program on Windows? (y/n) ";
+//	cin >> userOS;
+//	if (userOS == 'y' || userOS == 'Y')
+//	{
+//		windows = true;
+//	}
+//	if (userOS == 'n' || userOS == 'N')
+//	{
+//		windows = false;
+//	}
 
 
-	int numPeople;	// Array size
-	int count = 0;
-	int i;
-	int *a; // Will be array a
+	int userNumPeople;	// Array size
+	//int *a; // Will be array a
 
 	cout << "Welcome to VirusSimulation." << endl;
 	cout << "How many people do you want in the simulation? ";
-	cin >> numPeople;
+	cin >> userNumPeople;
 	// Variable a = new dynamic array of user defined size
-	a = new int[numPeople];
-
-	// psuedo code
+	//a = new int[numPeople];
+    vector<int> numPeople(userNumPeople);
+    cout << "vector numPeople holds: " << numPeople.size() << " elements" << endl;
+    
 	// (Maybe we should use vectors to auto - resize instead of arrays)
-	int infected;	// When this reaches the same number as the amount of people, simulation ends
-	bool run;		// Used for while loop
-
+	int infected = 0;	// When this reaches the same number as the amount of people, simulation ends
+	bool run = true;		// Used for while loop
+    
+    // Start timer
+    clock_t start;
+    double duration;
+    
+    vector<int> infectedVec;
+    vector<int> ambulanceVec;
+    
+    start = clock();
+    
 	while (run == true)
 	{
-		// Start timer
-		clock_t start;
-		double duration;
-
-		start = clock();
-
 		// Your algorithm here 
-		for (int i = 0; i < numPeople; i++)
+		for (int i = 0; i < userNumPeople; i++)
 		{
 			int r1 = rand() % 100;
 			if (r1 > 80)	// 20% chance
 			{
 				// Move person to infected array
-				copy[i] to infected array
-					infected++;
-				break;	// Not sure if I'm using this correctly. Want it to go back to top of while loop.
+				// copy[i] to infected array
+                // (Do we even need to do this step? Why do we need arrays in
+                // addition to the infected variable?)
+                infectedVec.push_back(1);
+                infected++;
+                cout << "1 person was infected" << endl;
+                //sleep_for(10ns);
+				continue;	// Move to top of while loop
 			}
-			else
-				continue;
 
 			int r2 = rand() % 100;
-			if (rand > 90)	// 10% chance
+			if (r2 > 90)	// 10% chance
 			{
 				// Move infected to ambulance
-				copy[i] to ambulance array
-					break;
+                ambulanceVec.push_back(1);
+                int r3 = rand() % 100;
+                if (r3 > 50)
+                {
+                    ambulanceVec.clear();
+                    numPeople.push_back(1);    // Add 1
+                    cout << "Someone was saved by the abulance." << endl;
+                }
+                continue;
 			}
-			else
-				continue;
 
-			if (infected == numPeople)
+
+			if (infected == userNumPeople)
 			{
 				run = false;
 			}
 		}
 	}
+    
 	duration = (clock() - start) / (double)CLOCKS_PER_SEC;
 	cout << "Everyone was infected." << endl;
 	cout << "It took " << duration << " seconds." << endl;
 
 
-
-
-	// Expand array and copy contents of array a into array b
-	int *b = doubleCapacity(a, numPeople);
-	cout << "\nDebug: The 1st array's values are now in the 2nd expanded array" << endl;
-
-	// User enters data into array b
-//    for (i = numPeople; i < 2 * numPeople; i++)
-//    {
-//        cout << "\nEnter element number " << i + 1 << ": ";
-//        cin >> b[i];
-//    }
-
-	// Delete data in arrays a and b
-	delete[] a;
-	delete[] b;
-
-
-	if (windows == true)
-	{
-		system("pause");
-		return 0;
-	}
-	else
-		return 0;
+//	if (windows == true)
+//	{
+//		system("pause");
+//		return 0;
+//	}
+//	else
+//		return 0;
 }
