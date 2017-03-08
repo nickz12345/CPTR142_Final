@@ -46,13 +46,13 @@ int main()
 	//a = new int[numPeople];
     vector<int> numPeople(userNumPeople);
     cout << "vector numPeople holds: " << numPeople.size() << " elements" << endl;
-    
+
 	// (Maybe we should use vectors to auto - resize instead of arrays)
 	int infected = 0;	// When this reaches the same number as the amount of people, simulation ends
     int saved = 0;
     int died = 0;
 	bool run = true;		// Used for while loop
-    
+
     // Start timer
     clock_t start;
     double duration;
@@ -61,10 +61,9 @@ int main()
     vector<int> infectedVec;
     vector<int> ambulanceVec;
 
-    
 	while (run == true)
 	{
-		// Your algorithm here 
+		// Your algorithm here
 		for (int i = 0; i < userNumPeople; i++)
 		{
 			int r1 = rand() % 100;
@@ -72,13 +71,13 @@ int main()
 			{
 				// Move person to infected array
 				// copy[i] to infected array
-                // (Do we even need to do this step? Why do we need arrays in
-                // addition to the infected variable?)
-                infectedVec.push_back(1);
-                infected++;
-                cout << "1 person was infected" << endl;
-                //sleep_for(10ns);
-				continue;	// Move to top of while loop
+		        // (Do we even need to do this step? Why do we need arrays in
+		        // addition to the infected variable?)
+		        infectedVec.push_back(1);
+		        infected++;
+		        cout << "1 person was infected" << endl;
+		        //sleep_for(10ns);
+				continue;		// Move to top of while loop
 			}
 
 			int r2 = rand() % 100;
@@ -97,7 +96,6 @@ int main()
                 continue;
 			}
 
-
 			if (infected == userNumPeople)
 			{
 				run = false;
@@ -105,7 +103,7 @@ int main()
             cout << "No one was infected or saved by the ambulance." << endl;
 		}
 	}
-    
+
 	duration = (clock() - start) / (double)CLOCKS_PER_SEC;
 	cout << "\n\nEveryone was infected." << endl;
     cout << saved << " people were saved by the ambulance." << endl;
