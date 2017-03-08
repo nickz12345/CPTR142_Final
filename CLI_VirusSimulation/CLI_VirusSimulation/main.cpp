@@ -49,6 +49,8 @@ int main()
     
 	// (Maybe we should use vectors to auto - resize instead of arrays)
 	int infected = 0;	// When this reaches the same number as the amount of people, simulation ends
+    int saved = 0;
+    int died = 0;
 	bool run = true;		// Used for while loop
     
     // Start timer
@@ -90,6 +92,7 @@ int main()
                     ambulanceVec.clear();
                     numPeople.push_back(1);    // Add 1
                     cout << "Someone was saved by the abulance." << endl;
+                    saved++;
                 }
                 continue;
 			}
@@ -99,11 +102,13 @@ int main()
 			{
 				run = false;
 			}
+            cout << "No one was infected or saved by the ambulance." << endl;
 		}
 	}
     
 	duration = (clock() - start) / (double)CLOCKS_PER_SEC;
-	cout << "Everyone was infected." << endl;
+	cout << "\n\nEveryone was infected." << endl;
+    cout << saved << " people were saved by the ambulance." << endl;
 	cout << "It took " << duration << " seconds." << endl;
 
 
