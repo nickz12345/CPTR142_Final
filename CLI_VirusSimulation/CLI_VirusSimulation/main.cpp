@@ -56,11 +56,11 @@ int main()
     // Start timer
     clock_t start;
     double duration;
+    start = clock();
     
     vector<int> infectedVec;
     vector<int> ambulanceVec;
-    
-    start = clock();
+
     
 	while (run == true)
 	{
