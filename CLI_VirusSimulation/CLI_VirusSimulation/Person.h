@@ -18,14 +18,30 @@ using namespace std;
 class Person
 {
 public:
-int health;
 int natImmunity;
+int health;
 int strain;
 
-Person(int h, int nat, int s) {
-	health = h;
-	natImmunity = nat;
-	strain = s;
+//Default constructor
+Person() {
+	natImmunity = rand() % 10;
+	
+	if(rand() % 100 <= 10)
+	{
+		health = 0;
+		strain = ((rand() % 4)+1);	//levels 1-4 are stain strengths; 0 means no strain multiplier
+	}
+	else { 
+		health = 1;
+		strain = 0;
+	     }
+}
+	
+//Full-control constructor
+Person(int nat,int h, int s) {
+	natImmunity = nat;		//0-9
+	health = h;			//0-3
+	strain = s;			//0-4
 }
 
 
