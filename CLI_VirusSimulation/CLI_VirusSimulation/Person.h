@@ -51,6 +51,18 @@ Person(double prob) {		//prob entered as 0-100; likelihood of disease at startup
 	     }
 }
 	
+Person(double prob, int intensity) {		//prob entered as 0-100; likelihood of disease at startup
+	
+	if(rand() % 101 <= prob)	//rand produces 0-100
+	{
+		health = 0;
+		strain = intensity;	//levels 1-4 are stain strengths; 0 means no strain multiplier
+	}
+	else { 
+		health = 1;
+		strain = 0;
+	     }
+	
 //Full-control constructor
 Person(int nat,int h, int s) {
 	natImmunity = nat;		//0-9
